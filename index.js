@@ -21,11 +21,16 @@ app.listen(port, () => {
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const meal = async () => {
-    await delay(5000)
-    const response = await fetch("http://localhost:8080/meal/all")
-    let myjson = response.json()
-    myjson.then(function (zupa) {
-        console.log(zupa)
-    })
+    // dla dockera, taka wersja musi być w kodzie faktycznym
+    const response = await fetch("http://spring:8080/meal/all")
+    // dla locala
+    // const response = await fetch("http://localhost:8080/meal/all")
+    const myjson = JSON.parse(await response.text())
+    // cały JSON
+    // console.log(myjson)
+    // jeden element z JSONa
+    // console.log(myjson[0])
+    // składniki konkretnego dania
+    console.log(myjson[0]["mealIngredients"])
 }
-console.log(meal())
+meal()

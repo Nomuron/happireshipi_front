@@ -1,5 +1,6 @@
 import * as bootstrap from "bootstrap";
 import * as model from "./model.js";
+import view from "./view.js";
 
 const minus = document.getElementById("minus");
 const plus = document.getElementById("plus");
@@ -7,31 +8,6 @@ const quantity = document.getElementById("quantity");
 // console.log(quantity.value);
 // console.log(typeof quantity.value);
 const addToList = document.getElementById("addToList");
-
-const API_URL = "http://localhost:8080/meal/";
-
-const getJSON = async function (url) {
-  try {
-    const res = await fetch(url, { method: "GET", mode: "cors" });
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})}`);
-    return data;
-  } catch (err) {
-    throw error;
-  }
-};
-
-export const loadMeal = async function (id) {
-  try {
-    const data = await getJSON(`${API_URL}${id}`);
-
-    console.log(data);
-  } catch (err) {
-    console.error(`${err}`);
-    throw err;
-  }
-};
 
 function addOne() {
   if (Number(quantity.value) < 100) {
@@ -55,4 +31,21 @@ minus.addEventListener("click", minusOne);
 plus.addEventListener("click", addOne);
 addToList.addEventListener("click", add);
 
-loadMeal(3);
+// Controller for loading data and render list
+const controlAllMeals = async function () {
+  try {
+    // 1. Fetch API for all meals
+    await model.loadAllMeals();
+
+    // 2. Render results
+    view.render(model.state.allMeals);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const init = function () {
+  view.addHandlerOnWindowLoad(controlAllMeals);
+};
+
+init();

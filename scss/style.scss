@@ -1,18 +1,19 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
 body {
   overflow-x: hidden;
-  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
   min-height: 75rem;
-  padding-top:8.5rem;
-
+  padding-top: 8.5rem;
 }
 
 #circle {
-    background: #007bff;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    text-align: center;
-    color: white;
+  background: #007bff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
 }
 
 .card {
@@ -29,18 +30,16 @@ body {
   width: 220px;
   padding-top: 20px;
   padding-bottom: 20px;
-
 }
 
 #filtr {
-  background-color:  #EFE28B;
+  background-color: #efe28b;
   border-radius: 1rem;
 }
 
 #addToListGroup {
   align-content: right;
 }
-
 
 #inList {
   top: 70px;
@@ -50,10 +49,10 @@ body {
 
 /*dopasowanie obrazka do ramki*/
 #portfolio .portfolio-item {
-margin-right: 30px;
-margin-left: 30px;
-margin-top: 10px;
-margin-bottom: 10px;
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #portfolio .portfolio-item .portfolio-link {
@@ -81,15 +80,13 @@ tutal uwidcznia to żólte po najechaniu*/
   opacity: 1;
 }
 
-
 /*marginy w karcie dania*/
 #portfolio .portfolio-item .portfolio-caption {
-  width: 80%
+  width: 80%;
   margin: 0 auto;
   padding: 10px;
   text-align: left;
 }
-
 
 /*
 modal to juz o pop-upa*/
@@ -121,7 +118,7 @@ modal to juz o pop-upa*/
   font-size: 16px;
   font-style: italic;
   margin: 20px 0 30px;
-  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .portfolio-modal .modal-content ul.list-inline {
@@ -152,8 +149,7 @@ modal to juz o pop-upa*/
 }
 
 .portfolio-modal .close-modal .lr {
-
-/*   Safari and Chrome */
+  /*   Safari and Chrome */
   z-index: 1051;
   width: 1px;
   height: 75px;
@@ -170,13 +166,12 @@ modal to juz o pop-upa*/
   z-index: 1052;
   width: 1px;
   height: 75px;
- /*  IE 9 */
+  /*  IE 9 */
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
   background-color: black;
 }
-
 
 @media only screen and (min-width: 375px) {
   #list {
@@ -184,9 +179,8 @@ modal to juz o pop-upa*/
   }
 
   #inList {
-  top: 80px;
-  right: 80px;
-  position: absolute;
+    top: 80px;
+    right: 80px;
+    position: absolute;
+  }
 }
-}
-

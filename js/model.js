@@ -1,5 +1,7 @@
 const API_URL = "http://localhost:8080/meal/";
 const ALL_MEALS_URL = "http://localhost:8080/meal/all";
+// dla dockera
+// const ALL_MEALS_URL = "http://spring:8080/meal/all";
 
 // State of data, object for fetching data from API
 export const state = {

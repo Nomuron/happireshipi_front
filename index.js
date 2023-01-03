@@ -5,6 +5,8 @@ import fetch from "node-fetch";
 
 const app = express();
 const port = 8081;
+//to use files from public
+app.use(express.static('public'));
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -22,9 +24,9 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const meal = async () => {
     // dla dockera, taka wersja musi być w kodzie faktycznym
-    const response = await fetch("http://spring:8080/meal/all")
+    // const response = await fetch("http://spring:8080/meal/all")
     // dla locala
-    // const response = await fetch("http://localhost:8080/meal/all")
+    const response = await fetch("http://localhost:8080/meal/all")
     const myjson = JSON.parse(await response.text())
     // cały JSON
     // console.log(myjson)
@@ -34,3 +36,7 @@ const meal = async () => {
     console.log(myjson[0]["mealIngredients"])
 }
 meal()
+
+app.get('/admin', (req, res) => {
+    res.sendFile(__dirname + '/public/html/admin_index.html');
+});

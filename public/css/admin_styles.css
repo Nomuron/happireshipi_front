@@ -1,0 +1,172 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+    margin: 0%;
+    display: block;
+}
+
+/* Style the header */
+header {
+    background-color: rgb(0, 5, 83);
+    text-align: center;
+    color: white;
+    height: 2%;
+}
+
+.app_title {
+    margin: 0%;
+    font-size: 35px;
+}
+
+.navigation{
+    width: 100%;
+}
+
+.nav_button {
+    width: 20%;
+}
+
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.page_login_title {
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-size: 40px;
+}
+
+label {
+    cursor: default;
+    color: white;
+}
+
+.page_info {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: greenyellow;
+    font-style: italic;
+    padding: 2% 1% 2% 1%;
+}
+
+#login_form {
+    content: "";
+    display: block;
+    border-radius: 5px;
+    background-color: rgb(26,26,26);
+    padding: 20px;
+    width: 35%;
+    margin: auto;
+}
+
+.list{
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    height: 50%;
+    margin-top: 10%;
+}
+
+.list_type{
+    height: 60px;
+    width: 500px;
+    display: inline-block;
+    margin-top: 20px;
+    padding-top: 25px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+}
+
+.list_type:hover{
+    border: 2px solid rgb(245, 245, 248);
+    background-color: rgb(0, 5, 83);
+}
+
+table.ingredients{
+    width: 90%;
+    margin: 0 5%;
+    color: white;
+    border: 0.5px solid rgb(255, 255, 255);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table.ingredients tr{
+    border: 0.5px solid white;
+    width: auto;
+}
+
+.button_edit{
+    background-color: #47525E;
+    color: white;
+    border: 1px solid #47525E;
+    border-radius: 4px;
+    margin: 2px 1px;
+}
+
+.button_remove{
+    background-color: #F95F62;
+    color: white;
+    border: 1px solid #F95F62;
+    border-radius: 4px;
+    margin: 2px 1px;
+}
+
+.button_create{
+    background-color: rgb(0, 5, 83);
+    color: white;
+    border: 1px solid rgb(0, 5, 83);
+    border-radius: 4px;
+    margin-top: 2%;
+    margin-left: 5%;
+    height: 30px;
+}
+
+.action button:hover{
+    cursor: pointer;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+    nav, form, .page_login_title {
+    width: 100%;
+    height: auto;
+    }
+
+    #login_form {
+    width: 60%;
+    display: table;
+    vertical-align: middle;
+    }
+
+    .app_title, .nav_button {
+        font-size: 15px;
+    }
+
+    .list {
+    font-size: 100%;
+    color: white;
+    text-decoration: none;
+    }
+
+    .list_type{
+    width: 70%;
+    padding-top: 20px;
+    height: 40px;
+    }
+}

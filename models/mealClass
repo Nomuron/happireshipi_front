@@ -1,12 +1,16 @@
 const meals = [];
 
-module.exports = class Meal {
+module.exports = class MealClass {
   constructor(meal) {
     this.meal = meal;
   }
 
   save() {
     meals.push(this);
+  }
+
+  static removeAll() {
+    meals = [];
   }
 
   static fetchAll() {

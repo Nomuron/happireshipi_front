@@ -68,12 +68,13 @@
     </form>
 
     <!-- Main page-->
-    <% for (let meal of meals) { %>
-    <p><%= meal %></p>
-    <% } %>
+    <p>name=<%= name %></p>
+
     <section class="" id="portfolio">
       <div class="container">
         <div class="row meal__list">
+          <!-- START -->
+          <% for (let item of meals) { %>
           <div class="col-md-4 col-sm-6 portfolio-item">
             <div class="card">
               <a
@@ -175,7 +176,8 @@
               </div>
             </div>
           </div>
-
+          <% } %>
+          <!-- NEXT ITEM -->
           <div class="col-md-4 col-sm-6 portfolio-item">
             <div class="card bg-light">
               <a

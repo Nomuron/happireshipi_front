@@ -6,11 +6,16 @@ const bodyParser = require("body-parser");
 
 // Variables
 const app = express();
-const Meal = require("./models/meal");
 // port for dev
 const port = 8085;
 // port for prod
 // const port = 8081;
+
+// object for storing Spring JSON
+const backJson = {
+  meal: {},
+  allMeals: [],
+};
 
 // Set engine for generating views from ./views folder
 app.set("view engine", "ejs");
@@ -32,14 +37,9 @@ app.use(express.static("public"));
 // used routes in express (endpoints)
 app.use(mainRoutes);
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
-
-// TEST:
-// const meals = function() {
-//   const response = fet
-// }
+// app.get("/", (req, res) => {
+//   res.sendFile(__dirname + "/index.html");
+// });
 
 // const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -53,12 +53,17 @@ meals = async () => {
   // cały JSON
   // console.log(myjson);
   // jeden element z JSONa
-  // console.log(myjson[0])
+  // console.log(myjson[0]);
   // składniki konkretnego dania
   // console.log(myjson[0]["mealIngredients"]);
-  myjson.forEach((meal) => {
-    const objMeal = new Meal(meal);
-    objMeal.save();
+  backJson.allMeals = myjson.map((meal) => {
+    return {
+      id: meal.id,
+      name: meal.name,
+      perPortionCalories: meal.perPortionCalories,
+      category: meal.category,
+      imageDirectory: meal.imageDirectory,
+    };
   });
 };
 
@@ -66,6 +71,7 @@ meals = async () => {
 app.listen(port);
 
 // fetching JSON from Spring API
-meals();
-const mealsModel = Meal.fetchAll();
-console.log(mealsModel);
+// meals();
+// console.log("in index.js");
+// console.log(backJson);
+// module.exports = backJson;

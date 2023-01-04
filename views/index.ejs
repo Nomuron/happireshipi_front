@@ -10,11 +10,16 @@
     <meta name="author" content="" />
     <title>Happireshipi</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="links/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
     <!--My css-->
-    <link rel="stylesheet" href="scss/style.scss" />
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- main controller-->
-    <script type="module" src="js/controller.js" />
+    <script type="module" src="./controller.js"></script>
+
+    <!--  -->
   </head>
 
   <body id="page-top" class="">
@@ -25,7 +30,7 @@
         <!-- now it has css only for mobile devices -it is not perfect dor bigger dimensions -->
         <!-- I did't have scroll-triger yet -->
         <a class="navbar-brand" href="#page-top">
-          <img src="img/logo.png" class="img float-left" />
+          <img src="images/logo.png" class="img float-left" />
         </a>
 
         <div id="inList">
@@ -40,7 +45,7 @@
         <a class="" href="https://www.wp.pl/">
           <img
             id="list"
-            src="img/lista.png"
+            src="images/lista.png"
             class="img float-right"
             width="50"
           />
@@ -63,6 +68,9 @@
     </form>
 
     <!-- Main page-->
+    <% for (let meal of meals) { %>
+    <p><%= meal %></p>
+    <% } %>
     <section class="" id="portfolio">
       <div class="container">
         <div class="row meal__list">
@@ -76,7 +84,7 @@
                 <div class="portfolio-hover">
                   <div class="portfolio-hover-content"></div>
                 </div>
-                <img src="img/portfolio/hat.jpg" alt="" class="img-fluid" />
+                <img src="images/portfolio/hat.jpg" alt="" class="img-fluid" />
               </a>
 
               <div class="portfolio-caption">
@@ -178,7 +186,7 @@
                 <div class="portfolio-hover">
                   <div class="portfolio-hover-content"></div>
                 </div>
-                <img src="img/portfolio/set.jpg" alt="" class="img-fluid" />
+                <img src="images/portfolio/set.jpg" alt="" class="img-fluid" />
               </a>
               <div class="portfolio-caption">
                 <h2 class="">PLACE HOLDER</h2>
@@ -198,7 +206,7 @@
                 <div class="portfolio-hover">
                   <div class="portfolio-hover-content"></div>
                 </div>
-                <img src="img/portfolio/ears.jpg" alt="" class="img-fluid" />
+                <img src="images/portfolio/ears.jpg" alt="" class="img-fluid" />
               </a>
               <div class="portfolio-caption">
                 <h2 class="">PLACE HOLDER</h2>
@@ -218,7 +226,7 @@
                 <div class="portfolio-hover">
                   <div class="portfolio-hover-content"></div>
                 </div>
-                <img src="img/portfolio/set.jpg" alt="" class="img-fluid" />
+                <img src="images/portfolio/set.jpg" alt="" class="img-fluid" />
               </a>
               <div class="portfolio-caption">
                 <h2 class="">PLACE HOLDER</h2>
@@ -238,7 +246,7 @@
                 <div class="portfolio-hover">
                   <div class="portfolio-hover-content"></div>
                 </div>
-                <img src="img/portfolio/ears.jpg" alt="" class="img-fluid" />
+                <img src="images/portfolio/ears.jpg" alt="" class="img-fluid" />
               </a>
               <div class="portfolio-caption">
                 <h2 class="">PLACE HOLDER</h2>
@@ -277,7 +285,7 @@
                   <!-- <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p> -->
                   <img
                     class="img-fluid d-block mx-auto"
-                    src="img/portfolio/hatB.jpg"
+                    src="images/portfolio/hatB.jpg"
                     alt=""
                   />
                   <p>

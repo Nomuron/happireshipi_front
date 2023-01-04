@@ -1,6 +1,6 @@
-import * as bootstrap from "bootstrap";
-import * as model from "./model.js";
-import view from "./view.js";
+import * as model from "./javascripts/model.js";
+import view from "./javascripts/view.js";
+import express from "../index.js";
 
 const minus = document.getElementById("minus");
 const plus = document.getElementById("plus");
@@ -46,6 +46,7 @@ const controlAllMeals = async function () {
 
 const init = function () {
   view.addHandlerOnWindowLoad(controlAllMeals);
+  express.meals();
 };
 
 init();

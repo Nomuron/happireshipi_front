@@ -5,3 +5,4 @@ RUN npm install
 COPY . .
 EXPOSE 8081
 CMD [ "node", "index.js" ]
+# CMD ["npm", "run", "start"]

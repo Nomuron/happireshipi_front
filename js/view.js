@@ -39,7 +39,7 @@ class View {
             <div class="portfolio-hover">
             <div class="portfolio-hover-content"></div>
             </div>
-            <img src="https://www.cukierniasamanta.pl/sklep/wp-content/uploads/2020/03/paczek.jpg" alt="" class="img-fluid" />
+            <img src="${meal.imageDirectory}" alt="" class="img-fluid" />
         </a>
 
         <div class="portfolio-caption">

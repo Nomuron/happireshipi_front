@@ -2,6 +2,8 @@ import * as bootstrap from "bootstrap";
 import * as model from "./model.js";
 import view from "./view.js";
 
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+
 const minus = document.getElementById("minus");
 const plus = document.getElementById("plus");
 const quantity = document.getElementById("quantity");

@@ -1,24 +1,12 @@
-// view for rendering list of all meals
-class View {
-  _data;
-  _parentElement = document.querySelector(".meal__list");
+import View from "./View";
 
-  // Method for rendering data
-  render(data) {
-    this._data = data;
-    const markup = this._generateMarkup();
-    this._clear();
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  }
+// view for generating meal items for main
+class MainView extends View {
+  _parentElement = document.querySelector(".meal__list");
 
   // Event listener trigers handler when window is loaded
   addHandlerOnWindowLoad(handler) {
     window.addEventListener("load", handler);
-  }
-
-  // Clear content of _parentElement
-  _clear() {
-    this._parentElement.innerHTML = "";
   }
 
   // Joining generated HTMLs for many meals in _data
@@ -34,7 +22,7 @@ class View {
         <a
             class="portfolio-link"
             data-toggle="modal"
-            href="#portfolioModal1"
+            href="#portfolioModal${meal.id}"
         >
             <div class="portfolio-hover">
             <div class="portfolio-hover-content"></div>
@@ -134,4 +122,4 @@ class View {
   }
 }
 
-export default new View();
+export default new MainView();

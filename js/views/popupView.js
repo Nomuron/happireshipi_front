@@ -4,11 +4,12 @@ import View from "./View";
 class PopupView extends View {
   _parentElement = document.querySelector(".modal-popups");
 
-  // Joining generated HTMLs for many meals in _data
+  // Joining generated HTML modals for every meal
   _generateMarkup() {
     return this._data.map(this._generateMarkupItemModal).join("");
   }
 
+  // modal content
   _generateMarkupItemModal(meal) {
     return `
         <div

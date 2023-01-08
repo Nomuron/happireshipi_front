@@ -1,3 +1,4 @@
+// parent class for view classes
 export default class View {
   _data;
 

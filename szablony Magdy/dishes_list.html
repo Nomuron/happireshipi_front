@@ -8,15 +8,14 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Lista zakupów</title>
+    <title>Lista dań</title>
     <!-- Bootstrap CSS -->
     <link href="links/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!--My css-->
-    <link href="../scss/style.scss" rel="stylesheet" />
-    <script src="../js/controller.js"></script>
+    <link href="./css/style.css" rel="stylesheet" />
   </head>
 
-  <!-- twoja lista zakupów -->
+  <!-- Twoja lista wybranych dań -->
 
   <body id="page-top" class="">
     <!-- Navigation -->
@@ -49,7 +48,7 @@
       </div>
     </nav>
 
-    <h4 class="mx-auto">TWOJA LISTA ZAKUPÓW</h4>
+    <h4 class="mx-auto">TWOJA LISTA WYBRANYCH DAŃ</h4>
 
     <ul class="list-inline list-group">
       <li
@@ -66,11 +65,17 @@
       </li>
     </ul>
 
+    <div class="fixed-bottom container" id="footer">
+      <p class="btn float-left" id="clean">Wyczyść listę dań</p>
+      <button class="btn float-right btn-primary" id="toProducts">
+        Do listy zakupów
+      </button>
+    </div>
     <!-- Bootstrap JavaScript -->
-    <!-- <script src="links/jquery/jquery.min.js"></script>
-    <script src="links/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+    <script src="links/jquery/jquery.min.js"></script>
+    <script src="links/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!--JS for menu  -->
-    <!-- <script src="js/script.js"></script> -->
+    <script src="js/script.js"></script>
   </body>
 </html>

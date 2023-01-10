@@ -9,6 +9,27 @@ class MainView extends View {
     window.addEventListener("load", handler);
   }
 
+  // handler for using buttons
+  addHandlerOnMealButtons() {
+    this._parentElement.addEventListener("click", function (e) {
+      const addToListGroup = e.target.closest(".addToListGroup");
+      if (!addToListGroup) return;
+
+      // event listeners for meal buttons and input
+      const btnMinus = addToListGroup.querySelector(".btn--minus");
+      const btnPlus = addToListGroup.querySelector(".btn--plus");
+      const inputQuantity = addToListGroup.querySelector(".quantity");
+
+      // BUG:
+      // zmiany na inpucie
+      btnMinus.addEventListener("click", function () {
+        if (Number(inputQuantity.value) > 1) inputQuantity.value -= 1;
+      });
+      btnPlus.addEventListener("click", function () {
+        if (Number(inputQuantity.value) < 100) inputQuantity.value += 1;
+      });
+    });
+  }
   // Joining generated HTMLs for many meals in _data
   _generateMarkup() {
     return this._data.map(this._generateMarkupItem).join("");
@@ -27,7 +48,7 @@ class MainView extends View {
             <div class="portfolio-hover">
             <div class="portfolio-hover-content"></div>
             </div>
-            <img src="https://www.cukierniasamanta.pl/sklep/wp-content/uploads/2020/03/paczek.jpg" alt="" class="img-fluid" />
+            <img src="${meal.imageDirectory}" alt="" class="img-fluid" />
         </a>
 
         <div class="portfolio-caption">
@@ -41,9 +62,9 @@ class MainView extends View {
             >
             <div class="btn-group" role="group"></div>
 
-            <div id="addToListGroup" class="input-group btn-group">
+            <div class="input-group btn-group addToListGroup">
                 <div class="input-group-prepend">
-                <button class="btn btn-primary" type="button" id="minus">
+                <button class="btn btn-primary btn--minus" type="button" data-update-to="${meal.servings}">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -61,16 +82,16 @@ class MainView extends View {
                 </div>
 
                 <input
-                id="quantity"
+                id='quantity'
                 type="text"
-                class=" "
+                class="quantity"
                 value="1"
                 aria-label=""
                 min="1"
                 />
 
                 <div class="input-group-prepend">
-                <button class="btn btn-primary" type="button" id="plus">
+                <button class="btn btn-primary btn--plus" type="button" data-update-to="${meal.servings}">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -89,9 +110,8 @@ class MainView extends View {
 
                 <div class="input-group-prepend">
                 <button
-                    class="btn btn-primary"
+                    class="btn btn-primary addToList"
                     type="button"
-                    id="addToList"
                 >
                     <svg
                     xmlns="http://www.w3.org/2000/svg"

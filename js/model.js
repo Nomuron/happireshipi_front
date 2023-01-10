@@ -67,6 +67,7 @@ export const loadAllMeals = async function () {
         carbohydrates: meal.carbohydrates,
         fats: meal.fats,
         ingredients: meal.mealIngredients,
+        servings: "0",
       };
     });
   } catch (err) {

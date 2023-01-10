@@ -6,23 +6,23 @@ import $ from "jquery";
 
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
-const minus = document.getElementById("minus");
-const plus = document.getElementById("plus");
-const quantity = document.getElementById("quantity");
+// const minus = document.getElementById("minus");
+// const plus = document.getElementById("plus");
+// const quantity = document.getElementById("quantity");
 // console.log(quantity.value);
 // console.log(typeof quantity.value);
-const addToList = document.getElementById("addToList");
+// const addToList = document.getElementById("addToList");
 
-$("#plus").click(addOne);
-$("#minus").click(minusOne);
-$("#addToList").click(add);
-$("#plus_popup").click(addOne_popup);
-$("#minus_popup").click(minusOne_popup);
-$("#addToList_popup").click(add_popup);
+// $("#plus").click(addOne);
+// $("#minus").click(minusOne);
+// $("#addToList").click(add);
+// $("#plus_popup").click(addOne_popup);
+// $("#minus_popup").click(minusOne_popup);
+// $("#addToList_popup").click(add_popup);
 
-minus.addEventListener("click", minusOne);
-plus.addEventListener("click", addOne);
-addToList.addEventListener("click", add);
+// minus.addEventListener("click", minusOne);
+// plus.addEventListener("click", addOne);
+// addToList.addEventListener("click", add);
 
 // Controller for loading data and render list
 const controlAllMeals = async function () {
@@ -35,16 +35,37 @@ const controlAllMeals = async function () {
 
     // 3. Render hide modals
     PopupView.render(model.state.allMeals);
+
+    // event listener for JQuery buttons
+    controlMealButtons();
   } catch (err) {
     console.error(err);
   }
 };
 
-const init = function () {
-  MainView.addHandlerOnWindowLoad(controlAllMeals);
+const controlMealButtons = function () {
+  // after generating view
+  const plusBtn = document.querySelector("#plus");
+  const minusBtn = document.querySelector("#minus");
+  const addBtn = document.querySelector("#addToList");
+  const plusPopBtn = document.querySelector("#plus_popup");
+  const minusPopBtn = document.querySelector("#minus_popup");
+  const addPopBtn = document.querySelector("#addToList_popup");
+
+  plusBtn.addEventListener("click", addOne);
+  minusBtn.addEventListener("click", minusOne);
+  addBtn.addEventListener("click", add);
+  plusPopBtn.addEventListener("click", addOne_popup);
+  minusPopBtn.addEventListener("click", minusOne_popup);
+  addPopBtn.addEventListener("click", add_popup);
 };
 
-// var quantity = document.getElementById("quantity");
+const init = function () {
+  MainView.addHandlerOnWindowLoad(controlAllMeals);
+  MainView.addHandlerOnMealButtons();
+};
+
+let quantity = document.getElementById("quantity");
 
 function addOne() {
   if (Number(quantity.value) < 100) {

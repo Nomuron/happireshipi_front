@@ -6,24 +6,6 @@ import $ from "jquery";
 
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
-// const minus = document.getElementById("minus");
-// const plus = document.getElementById("plus");
-// const quantity = document.getElementById("quantity");
-// console.log(quantity.value);
-// console.log(typeof quantity.value);
-// const addToList = document.getElementById("addToList");
-
-// $("#plus").click(addOne);
-// $("#minus").click(minusOne);
-// $("#addToList").click(add);
-// $("#plus_popup").click(addOne_popup);
-// $("#minus_popup").click(minusOne_popup);
-// $("#addToList_popup").click(add_popup);
-
-// minus.addEventListener("click", minusOne);
-// plus.addEventListener("click", addOne);
-// addToList.addEventListener("click", add);
-
 // Controller for loading data and render list
 const controlAllMeals = async function () {
   try {
@@ -37,14 +19,14 @@ const controlAllMeals = async function () {
     PopupView.render(model.state.allMeals);
 
     // event listener for JQuery buttons
-    controlMealButtons();
+    MainView.addHandlerOnMealButtons();
   } catch (err) {
     console.error(err);
   }
 };
 
+// selectors and event listeners for placeholder
 const controlMealButtons = function () {
-  // after generating view
   const plusBtn = document.querySelector("#plus");
   const minusBtn = document.querySelector("#minus");
   const addBtn = document.querySelector("#addToList");
@@ -61,11 +43,9 @@ const controlMealButtons = function () {
 };
 
 const init = function () {
+  controlMealButtons();
   MainView.addHandlerOnWindowLoad(controlAllMeals);
-  MainView.addHandlerOnMealButtons();
 };
-
-let quantity = document.getElementById("quantity");
 
 function addOne() {
   if (Number(quantity.value) < 100) {
@@ -97,16 +77,5 @@ function add() {
 function add_popup() {
   console.log("dodano do listy dań " + quantity_popup.value + " porcje");
 }
-
-// var minus_popup= document.getElementById("minus_popup");
-// var plus_popup = document.getElementById("plus_popup");
-// var quantity_popup = document.getElementById("quantity_popup");
-// // console.log(quantity.value);
-// // console.log(typeof quantity.value);
-// var addToList_popup=document.getElementById("addToList_popup");
-
-// minus_popup.addEventListener("click", minusOne );
-// plus_popup.addEventListener("click", addOne );
-// addToList_popup.addEventListener("click", add);
 
 init();

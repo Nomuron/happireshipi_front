@@ -11,25 +11,35 @@ class MainView extends View {
 
   // handler for using buttons
   addHandlerOnMealButtons() {
-    this._parentElement.addEventListener("click", function (e) {
-      const addToListGroup = e.target.closest(".addToListGroup");
-      if (!addToListGroup) return;
+    // znajduje wszystkie grupy przycisków z głównej strony
+    const addToListGroupNodeList =
+      this._parentElement.querySelectorAll(".addToListGroup");
 
-      // event listeners for meal buttons and input
-      const btnMinus = addToListGroup.querySelector(".btn--minus");
-      const btnPlus = addToListGroup.querySelector(".btn--plus");
-      const inputQuantity = addToListGroup.querySelector(".quantity");
+    // dodaje handlery do każdej grupy przycisków
+    addToListGroupNodeList.forEach(this._addHandlerOnMealButtons);
+  }
 
-      // BUG:
-      // zmiany na inpucie
-      btnMinus.addEventListener("click", function () {
-        if (Number(inputQuantity.value) > 1) inputQuantity.value -= 1;
-      });
-      btnPlus.addEventListener("click", function () {
-        if (Number(inputQuantity.value) < 100) inputQuantity.value += 1;
-      });
+  _addHandlerOnMealButtons(node) {
+    // selectors for meal buttons and input
+    const btnMinus = node.querySelector(".btn--minus");
+    const btnPlus = node.querySelector(".btn--plus");
+    const inputQuantity = node.querySelector(".quantity");
+
+    // event listener for minus button
+    btnMinus.addEventListener("click", function () {
+      if (Number(inputQuantity.value) > 1) {
+        inputQuantity.value = String(Number(inputQuantity.value) - 1);
+      }
+    });
+
+    // event listener for plus button
+    btnPlus.addEventListener("click", function () {
+      if (Number(inputQuantity.value) < 100) {
+        inputQuantity.value = String(Number(inputQuantity.value) + 1);
+      }
     });
   }
+
   // Joining generated HTMLs for many meals in _data
   _generateMarkup() {
     return this._data.map(this._generateMarkupItem).join("");

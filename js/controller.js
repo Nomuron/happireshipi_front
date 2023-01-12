@@ -25,6 +25,11 @@ const controlAllMeals = async function () {
   }
 };
 
+const controlAddToList = function (mealId, mealServings) {
+  console.log("Id: " + mealId);
+  console.log("Porcje: " + mealServings);
+};
+
 // selectors and event listeners for placeholder
 const controlMealButtons = function () {
   const plusBtn = document.querySelector("#plus");
@@ -45,6 +50,7 @@ const controlMealButtons = function () {
 const init = function () {
   controlMealButtons();
   MainView.addHandlerOnWindowLoad(controlAllMeals);
+  MainView.addHandlerAddToList(controlAddToList);
 };
 
 function addOne() {

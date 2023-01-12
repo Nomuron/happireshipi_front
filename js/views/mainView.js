@@ -24,11 +24,13 @@ class MainView extends View {
     const btnMinus = node.querySelector(".btn--minus");
     const btnPlus = node.querySelector(".btn--plus");
     const inputQuantity = node.querySelector(".quantity");
+    const btnAddToList = node.querySelector(".addToList");
 
     // event listener for minus button
     btnMinus.addEventListener("click", function () {
       if (Number(inputQuantity.value) > 1) {
         inputQuantity.value = String(Number(inputQuantity.value) - 1);
+        btnAddToList.dataset.mealServings = inputQuantity.value;
       }
     });
 
@@ -36,7 +38,24 @@ class MainView extends View {
     btnPlus.addEventListener("click", function () {
       if (Number(inputQuantity.value) < 100) {
         inputQuantity.value = String(Number(inputQuantity.value) + 1);
+        btnAddToList.dataset.mealServings = inputQuantity.value;
       }
+    });
+  }
+
+  // osobny handler na Dodaj do listy
+  addHandlerAddToList(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btnAddToList = e.target.closest(".addToList");
+      // const addToListGroup = e.target.closest(".addToListGroup");
+      if (!btnAddToList) return;
+
+      const mealId = btnAddToList.dataset.mealId;
+
+      // pobierz ilość porcji
+      const mealServings = btnAddToList.dataset.mealServings;
+
+      handler(mealId, mealServings);
     });
   }
 
@@ -74,7 +93,7 @@ class MainView extends View {
 
             <div class="input-group btn-group addToListGroup">
                 <div class="input-group-prepend">
-                <button class="btn btn-primary btn--minus" type="button" data-update-to="${meal.servings}">
+                <button class="btn btn-primary btn--minus" type="button">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -101,7 +120,7 @@ class MainView extends View {
                 />
 
                 <div class="input-group-prepend">
-                <button class="btn btn-primary btn--plus" type="button" data-update-to="${meal.servings}">
+                <button class="btn btn-primary btn--plus" type="button">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -121,6 +140,8 @@ class MainView extends View {
                 <div class="input-group-prepend">
                 <button
                     class="btn btn-primary addToList"
+                    data-meal-servings="${meal.servings}" 
+                    data-meal-id="${meal.id}" 
                     type="button"
                 >
                     <svg

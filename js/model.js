@@ -42,8 +42,6 @@ export const loadMeal = async function (id) {
       fats: meal.fats,
       ingredients: meal.mealIngredients[0],
     };
-
-    console.log(data);
   } catch (err) {
     console.error(`${err}`);
     throw err;

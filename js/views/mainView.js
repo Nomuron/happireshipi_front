@@ -50,12 +50,23 @@ class MainView extends View {
       // const addToListGroup = e.target.closest(".addToListGroup");
       if (!btnAddToList) return;
 
+      // pobierz id
       const mealId = btnAddToList.dataset.mealId;
+
+      // pobierz nazwę dania
+      const mealName = btnAddToList.dataset.mealName;
 
       // pobierz ilość porcji
       const mealServings = btnAddToList.dataset.mealServings;
 
-      handler(mealId, mealServings);
+      // utwórz obiekt
+      const mealToListObject = {
+        id: mealId,
+        name: mealName,
+        servings: mealServings,
+      };
+
+      handler(mealToListObject);
     });
   }
 
@@ -140,8 +151,9 @@ class MainView extends View {
                 <div class="input-group-prepend">
                 <button
                     class="btn btn-primary addToList"
-                    data-meal-servings="${meal.servings}" 
                     data-meal-id="${meal.id}" 
+                    data-meal-name="${meal.name}"
+                    data-meal-servings="${meal.servings}" 
                     type="button"
                 >
                     <svg

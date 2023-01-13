@@ -25,9 +25,21 @@ const controlAllMeals = async function () {
   }
 };
 
-const controlAddToList = function (mealId, mealServings) {
-  console.log("Id: " + mealId);
-  console.log("Porcje: " + mealServings);
+// sterownik dodający posiłek do listy
+const controlAddToList = function (mealToListObject) {
+  // Dodaj posiłek do listy w model.state.bookmarks
+  // Jeśli ten posiłek tam jest to jest zastępowany
+  // Jeśli go tam nie ma to jest po prostu pushowany
+  if (
+    model.state.bookmarks.some(
+      (bookmark) => bookmark.id === mealToListObject.id
+    )
+  ) {
+    const bookmarkId = model.state.bookmarks.findIndex(
+      (bookmark) => bookmark.id === mealToListObject.id
+    );
+    model.replaceMealInList(mealToListObject, bookmarkId);
+  } else model.addMealToList(mealToListObject);
 };
 
 // selectors and event listeners for placeholder
@@ -47,6 +59,8 @@ const controlMealButtons = function () {
   addPopBtn.addEventListener("click", add_popup);
 };
 
+// Funkcja inicjalizująca odpalana jako pierwsza.
+// Ładuje wszystkie handlery na controlery
 const init = function () {
   controlMealButtons();
   MainView.addHandlerOnWindowLoad(controlAllMeals);

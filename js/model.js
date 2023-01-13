@@ -5,8 +5,11 @@ const ALL_MEALS_URL = "http://localhost:8080/meal/all";
 
 // State of data, object for fetching data from API
 export const state = {
+  // na pojedynczy posiłek, nieużywane
   meal: {},
+  // tutaj będą wszystkie posiłki z pobranego JSONa
   allMeals: [],
+  // tutaj będą posiłki dodane do listy
   bookmarks: [],
 };
 
@@ -65,7 +68,7 @@ export const loadAllMeals = async function () {
         carbohydrates: meal.carbohydrates,
         fats: meal.fats,
         ingredients: meal.mealIngredients,
-        servings: "0",
+        servings: "1",
       };
     });
   } catch (err) {
@@ -73,3 +76,41 @@ export const loadAllMeals = async function () {
     throw err;
   }
 };
+
+// funkcja używana podczas dodawania posiłku do listy, gdy tego posiłku nie ma na liście
+export const addMealToList = function (mealToListObject) {
+  // dodaje posiłek do listy
+  state.bookmarks.push(mealToListObject);
+
+  // zapis do local storage
+  persistBookmarks();
+};
+
+// funkcja używana podczas dodawania posiłku do listy, gdy ten posiłek jest na liście
+export const replaceMealInList = function (mealToListObject, mealIdInList) {
+  // jeśli dany posiłek jest na liście to jest zastępowany
+  state.bookmarks.splice(mealIdInList, 1, mealToListObject);
+
+  // zapis do local storage
+  persistBookmarks();
+};
+
+// zapis do local storage
+// Local storage jest używany przez klienta.
+// Ciastka natomiast są wysyłane na serwer.
+// Z racji tego, że nie wysyłamy niczego na Springa to ograniczyłem się do local storage.
+const persistBookmarks = function () {
+  // do local storage są zapisywane jedynie wybrane posiłki
+  localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+};
+
+// funkcja inicjalizująca do wczytywania local storage
+const init = function () {
+  // wczytywanie local storage
+  const storage = localStorage.getItem("bookmarks");
+
+  // jeśli local storage jest to wczytaj go do tablicy wybranych posiłków
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();

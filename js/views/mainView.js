@@ -1,24 +1,62 @@
-// view for rendering list of all meals
-class View {
-  _data;
-  _parentElement = document.querySelector(".meal__list");
+import View from "./View";
 
-  // Method for rendering data
-  render(data) {
-    this._data = data;
-    const markup = this._generateMarkup();
-    this._clear();
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  }
+// view for generating meal items for main
+class MainView extends View {
+  _parentElement = document.querySelector(".meal__list");
 
   // Event listener trigers handler when window is loaded
   addHandlerOnWindowLoad(handler) {
     window.addEventListener("load", handler);
   }
 
-  // Clear content of _parentElement
-  _clear() {
-    this._parentElement.innerHTML = "";
+  // handler for using buttons
+  addHandlerOnMealButtons() {
+    // znajduje wszystkie grupy przycisków z głównej strony
+    const addToListGroupNodeList =
+      this._parentElement.querySelectorAll(".addToListGroup");
+
+    // dodaje handlery do każdej grupy przycisków
+    addToListGroupNodeList.forEach(this._addHandlerOnMealButtons);
+  }
+
+  _addHandlerOnMealButtons(node) {
+    // selectors for meal buttons and input
+    const btnMinus = node.querySelector(".btn--minus");
+    const btnPlus = node.querySelector(".btn--plus");
+    const inputQuantity = node.querySelector(".quantity");
+    const btnAddToList = node.querySelector(".addToList");
+
+    // event listener for minus button
+    btnMinus.addEventListener("click", function () {
+      if (Number(inputQuantity.value) > 1) {
+        inputQuantity.value = String(Number(inputQuantity.value) - 1);
+        btnAddToList.dataset.mealServings = inputQuantity.value;
+      }
+    });
+
+    // event listener for plus button
+    btnPlus.addEventListener("click", function () {
+      if (Number(inputQuantity.value) < 100) {
+        inputQuantity.value = String(Number(inputQuantity.value) + 1);
+        btnAddToList.dataset.mealServings = inputQuantity.value;
+      }
+    });
+  }
+
+  // osobny handler na Dodaj do listy
+  addHandlerAddToList(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btnAddToList = e.target.closest(".addToList");
+      // const addToListGroup = e.target.closest(".addToListGroup");
+      if (!btnAddToList) return;
+
+      const mealId = btnAddToList.dataset.mealId;
+
+      // pobierz ilość porcji
+      const mealServings = btnAddToList.dataset.mealServings;
+
+      handler(mealId, mealServings);
+    });
   }
 
   // Joining generated HTMLs for many meals in _data
@@ -34,7 +72,7 @@ class View {
         <a
             class="portfolio-link"
             data-toggle="modal"
-            href="#portfolioModal1"
+            href="#portfolioModal${meal.id}"
         >
             <div class="portfolio-hover">
             <div class="portfolio-hover-content"></div>
@@ -53,9 +91,9 @@ class View {
             >
             <div class="btn-group" role="group"></div>
 
-            <div id="addToListGroup" class="input-group btn-group">
+            <div class="input-group btn-group addToListGroup">
                 <div class="input-group-prepend">
-                <button class="btn btn-primary" type="button" id="minus">
+                <button class="btn btn-primary btn--minus" type="button">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -73,16 +111,16 @@ class View {
                 </div>
 
                 <input
-                id="quantity"
+                id='quantity'
                 type="text"
-                class=" "
+                class="quantity"
                 value="1"
                 aria-label=""
                 min="1"
                 />
 
                 <div class="input-group-prepend">
-                <button class="btn btn-primary" type="button" id="plus">
+                <button class="btn btn-primary btn--plus" type="button">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -101,9 +139,10 @@ class View {
 
                 <div class="input-group-prepend">
                 <button
-                    class="btn btn-primary"
+                    class="btn btn-primary addToList"
+                    data-meal-servings="${meal.servings}" 
+                    data-meal-id="${meal.id}" 
                     type="button"
-                    id="addToList"
                 >
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -134,4 +173,4 @@ class View {
   }
 }
 
-export default new View();
+export default new MainView();

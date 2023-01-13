@@ -36,9 +36,12 @@ export const loadMeal = async function (id) {
       perPortionCalories: meal.perPortionCalories,
       category: meal.category,
       imageDirectory: meal.imageDirectory,
+      recipe: meal.recipe,
+      proteins: meal.proteins,
+      carbohydrates: meal.carbohydrates,
+      fats: meal.fats,
+      ingredients: meal.mealIngredients[0],
     };
-
-    console.log(data);
   } catch (err) {
     console.error(`${err}`);
     throw err;
@@ -57,6 +60,12 @@ export const loadAllMeals = async function () {
         perPortionCalories: meal.perPortionCalories,
         category: meal.category,
         imageDirectory: meal.imageDirectory,
+        recipe: meal.recipe,
+        proteins: meal.proteins,
+        carbohydrates: meal.carbohydrates,
+        fats: meal.fats,
+        ingredients: meal.mealIngredients,
+        servings: "0",
       };
     });
   } catch (err) {

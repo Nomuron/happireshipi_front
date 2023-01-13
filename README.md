@@ -2,7 +2,7 @@
 
 Front-end for Spring API, developed with NPM and Parcel.
 
-### Instrukcja jak naprawić to co Łukasz zepsuł
+### Instrukcja jak mieć pewność, że zadziała
 
 1. Otworzyć terminal w folderze backendowym (`happireshipi`).
    1. `git branch`. Jeśli nie jesteś na `main` to `git checkout main`. Potem `git pull`.

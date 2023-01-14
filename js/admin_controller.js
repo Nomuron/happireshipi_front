@@ -1,47 +1,32 @@
-import * as bootstrap from "bootstrap";
-import * as model from "./admin_model.js";
-import view from "./admin_view.js";
-import * as model from "../html/admin_home_page.html"
-import $ from "jquery";
 
-// function login() {
-//     var n = document.getElementById("login").value;
-//     var p = document.getElementById("password").value;
-
-//     var postObj = JSON.stringify({
-//         "login": n,
-//         "password": p
-//     });
-
-//     $.ajax({
-//         url: "http://localhost:8080/admin", // endpoint
-//         type: "POST",
-//         data: postObj,
-//         // contentType: "application/json; charset=utf-8",
-//         success: function (result) {
-//             console.log("Brawo - zalogowałeś się!")
-//         },
-//         error: function (errorData) { onError(errorData); }
-//     });
-// }
-function login() {
-    const login = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    console.log("DUPA");
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://localhost:8080/admin");
-    xhttp.setRequestHeader("login", login);
-    xhttp.setRequestHeader("password", password);
-    xhttp.send(null);
-    console.log(xhttp.response);
-    if(xhttp.response == true){
-        // window.location.href = '/html/admin_home_page.html';
-        location.assign("/html/admin_home_page.html");
-    } else {
-        console.log("Błędne dane administratora!");
-        location.assign("/html/admin_home_page.html");
+const init = function () {
+    if(document.getElementById("login_btn") != null){
+        document.getElementById("login_btn").addEventListener("click", function(){
+            const login = document.getElementById("login").value;
+            const password = document.getElementById("password").value;
+            
+            fetch("http://localhost:8080/admin",{
+                method:"POST",
+                headers:{
+                    "login": login,
+                    "password": password
+                },
+                redirect: 'follow',
+                contentType: "application/json; charset=utf-8",
+                body:null
+            }).then((response) => { response.json().then(data => {
+                console.log("test");
+                console.log(data);
+                if(data==true){
+                    window.location.href = '/html/admin_home_page.html';
+                } else {
+                    document.getElementById("login_message").innerHTML = "Logowanie nie powiodło się";
+                }
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        });
     }
 }
-
-// document.getElementById("login_btn").addEventListener('click', login("stefan", "Zuparomana#"));
-$("#login_btn").click(login);
+init();

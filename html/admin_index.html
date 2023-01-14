@@ -5,36 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/admin_styles.css">
-        <style>          
-            input[type=text], select {
-                width: 100%;
-                padding: 12px 20px;
-                margin: 8px 0;
-                color: rgb(0, 5, 83);
-                display: block;
-                border: 1px solid rgb(0, 5, 83);
-                border-radius: 4px;
-                box-sizing: border-box;
-                margin-bottom: 4%;
-            }
-
-            button[type=submit] {
-                background-color: rgb(0, 5, 83);
-                color: white;
-                padding: 14px 20px;
-                font-size: medium;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                display: block;
-                margin: 30px auto;
-                width: 40%;
-            }
-
-            input[type=submit]:hover {
-                background-color: rgb(51, 53, 88);
-            }
-        </style>
     </head>
     <body style="background-color:rgb(26,26,26);">
         <header>
@@ -56,15 +26,14 @@
             <p>Zaloguj się</p>
         </section>
         <div id="login_form">
-            <form action="/html/admin_home_page.html">
-                <label for="fname">Login</label>
-                <input type="text" id="fname" name="login" placeholder="Login administratora">
-          
-                <label for="lname">Hasło</label>
-                <input type="text" id="lname" name="password" placeholder="Hasło administratora">
-          
-                <button id="login_btn" type="submit" value="Zaloguj">Zaloguj</button>
+            <form>
+                <label for="login">Login</label>
+                <input class="login_text" type="text" id="login" name="login" placeholder="Login administratora">
+                <label for="password">Hasło</label>
+                <input class="login_text" type="password" id="password" name="password" placeholder="Hasło administratora">
+                <button class="login_btn" id="login_btn" type="button" value="Zaloguj">Zaloguj</button>
             </form>
+            <p class="login_message" id="login_message"></p>
         </div>
         <script type="module" src="../js/admin_controller.js"></script>
     </body>

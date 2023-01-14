@@ -137,6 +137,40 @@ table.ingredients tr{
     height: 30px;
 }
 
+.login_text {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    color: rgb(0, 5, 83);
+    display: block;
+    border: 1px solid rgb(0, 5, 83);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 4%;
+}
+
+.login_btn {
+    background-color: rgb(0, 5, 83);
+    color: white;
+    padding: 14px 20px;
+    font-size: medium;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    width: 40%;
+}
+
+.login_btn:hover {
+    background-color: rgb(51, 53, 88);
+}
+
+.login_message{
+    color: #F95F62;
+    text-align: center;
+}
+
 .action button:hover{
     cursor: pointer;
 }

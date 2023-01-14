@@ -9,6 +9,15 @@ class MainView extends View {
     window.addEventListener("load", handler);
   }
 
+  // Event listener on category list
+  addHandlerCategorySelect(handler) {
+    const filter = document.querySelector("#filtr");
+
+    filter.addEventListener("input", function (e) {
+      handler(e.target.value);
+    });
+  }
+
   // Here you generate HTML for one meal
   _generateMarkupItem(meal) {
     return `

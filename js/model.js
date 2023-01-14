@@ -1,5 +1,9 @@
 const API_URL = "http://localhost:8080/meal/";
 const ALL_MEALS_URL = "http://localhost:8080/meal/all";
+
+// http://localhost:8080/meal/sort/{category}
+const MEALS_BY_CATEGORY = "http://localhost:8080/meal/sort/";
+
 // dla dockera
 // const ALL_MEALS_URL = "http://spring:8080/meal/all";
 
@@ -22,7 +26,7 @@ const getJSON = async function (url) {
     if (!res.ok) throw new Error(`${data.message} (${res.status})}`);
     return data;
   } catch (err) {
-    throw error;
+    throw err;
   }
 };
 
@@ -51,10 +55,39 @@ export const loadMeal = async function (id) {
   }
 };
 
+// TODO:
+// function for pushing data into state.allMeals
+
 // Fetch all meals from API and load it into state object
 export const loadAllMeals = async function () {
   try {
     const data = await getJSON(ALL_MEALS_URL);
+
+    state.allMeals = data.map((meal) => {
+      return {
+        id: meal.id,
+        name: meal.name,
+        perPortionCalories: meal.perPortionCalories,
+        category: meal.category,
+        imageDirectory: meal.imageDirectory,
+        recipe: meal.recipe,
+        proteins: meal.proteins,
+        carbohydrates: meal.carbohydrates,
+        fats: meal.fats,
+        ingredients: meal.mealIngredients,
+        servings: "1",
+      };
+    });
+  } catch (err) {
+    console.error(`${err}`);
+    throw err;
+  }
+};
+
+// funkcja do pobierania posiłków o danej kategorii ze Springa
+export const findAllByCategory = async function (category) {
+  try {
+    const data = await getJSON(`${MEALS_BY_CATEGORY}${category}`);
 
     state.allMeals = data.map((meal) => {
       return {

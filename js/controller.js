@@ -2,7 +2,7 @@ import * as bootstrap from "bootstrap";
 import * as model from "./model.js";
 import MainView from "./views/mainView.js";
 import PopupView from "./views/popupView.js";
-import $ from "jquery";
+import $, { type } from "jquery";
 
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -43,6 +43,26 @@ const controlAddToList = function (mealToListObject) {
   } else model.addMealToList(mealToListObject);
 };
 
+// control for category list
+const controlCategorySelect = async function (category) {
+  try {
+    if (category === "all") {
+      controlAllMeals();
+    } else {
+      // 1. Fetch API for all meals by category
+      await model.findAllByCategory(category);
+
+      // 2. Render main selected meals
+      MainView.render(model.state.allMeals);
+
+      // event listener for JQuery buttons in main view
+      MainView.addHandlerOnMealButtons();
+    }
+  } catch (err) {
+    console.error(`${err}`);
+  }
+};
+
 // selectors and event listeners for placeholder
 const controlMealButtons = function () {
   const plusBtn = document.querySelector("#plus");
@@ -67,6 +87,7 @@ const init = function () {
   MainView.addHandlerOnWindowLoad(controlAllMeals);
   MainView.addHandlerAddToList(controlAddToList);
   PopupView.addHandlerAddToList(controlAddToList);
+  MainView.addHandlerCategorySelect(controlCategorySelect);
 };
 
 function addOne() {

@@ -120,6 +120,14 @@ export const replaceMealInList = function (mealToListObject, mealIdInList) {
   persistBookmarks();
 };
 
+export const cleanList = function () {
+  // wyczyść state.bookmarks
+  state.bookmarks = [];
+
+  // zapis do local storage
+  persistBookmarks();
+};
+
 // zapis do local storage
 // Local storage jest używany przez klienta.
 // Ciastka natomiast są wysyłane na serwer.

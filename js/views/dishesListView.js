@@ -3,6 +3,12 @@ import View from "./View.js";
 class DishesListView extends View {
   _parentElement = document.querySelector(".dishes__list");
 
+  // handler na przycisk 'Wyczyść listę dań'
+  addHandlerOnCleanBtn(handler) {
+    const cleanBtn = document.querySelector("#clean");
+    cleanBtn.addEventListener("click", handler);
+  }
+
   _generateMarkupItem(bookmark) {
     return `
     <li

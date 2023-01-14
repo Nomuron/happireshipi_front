@@ -2,6 +2,7 @@ import * as bootstrap from "bootstrap";
 import * as model from "./model.js";
 import MainView from "./views/mainView.js";
 import PopupView from "./views/popupView.js";
+import ListIconView from "./views/listIconView.js";
 import $, { type } from "jquery";
 
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -21,6 +22,9 @@ const controlAllMeals = async function () {
     // event listener for JQuery buttons
     MainView.addHandlerOnMealButtons();
     PopupView.addHandlerOnMealButtons();
+
+    // renderuje odpowiednią liczbę na ikonie listy
+    ListIconView.render(model.state.bookmarks);
   } catch (err) {
     console.error(err);
   }
@@ -41,6 +45,9 @@ const controlAddToList = function (mealToListObject) {
     );
     model.replaceMealInList(mealToListObject, bookmarkId);
   } else model.addMealToList(mealToListObject);
+
+  // renderuje odpowiednią liczbę na ikonie listy
+  ListIconView.render(model.state.bookmarks);
 };
 
 // control for category list

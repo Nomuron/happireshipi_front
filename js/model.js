@@ -55,29 +55,33 @@ export const loadMeal = async function (id) {
   }
 };
 
-// TODO:
 // function for pushing data into state.allMeals
+const pushMealsToState = function (data) {
+  state.allMeals = data.map((meal) => {
+    return {
+      id: meal.id,
+      name: meal.name,
+      perPortionCalories: meal.perPortionCalories,
+      category: meal.category,
+      imageDirectory: meal.imageDirectory,
+      recipe: meal.recipe,
+      proteins: meal.proteins,
+      carbohydrates: meal.carbohydrates,
+      fats: meal.fats,
+      ingredients: meal.mealIngredients,
+      servings: "1",
+    };
+  });
+};
 
 // Fetch all meals from API and load it into state object
 export const loadAllMeals = async function () {
   try {
+    // pobieranie wszystkich posiłków
     const data = await getJSON(ALL_MEALS_URL);
 
-    state.allMeals = data.map((meal) => {
-      return {
-        id: meal.id,
-        name: meal.name,
-        perPortionCalories: meal.perPortionCalories,
-        category: meal.category,
-        imageDirectory: meal.imageDirectory,
-        recipe: meal.recipe,
-        proteins: meal.proteins,
-        carbohydrates: meal.carbohydrates,
-        fats: meal.fats,
-        ingredients: meal.mealIngredients,
-        servings: "1",
-      };
-    });
+    // umieszczenie ich w state.allMeals
+    pushMealsToState(data);
   } catch (err) {
     console.error(`${err}`);
     throw err;
@@ -87,23 +91,11 @@ export const loadAllMeals = async function () {
 // funkcja do pobierania posiłków o danej kategorii ze Springa
 export const findAllByCategory = async function (category) {
   try {
+    // pobieranie po kategorii
     const data = await getJSON(`${MEALS_BY_CATEGORY}${category}`);
 
-    state.allMeals = data.map((meal) => {
-      return {
-        id: meal.id,
-        name: meal.name,
-        perPortionCalories: meal.perPortionCalories,
-        category: meal.category,
-        imageDirectory: meal.imageDirectory,
-        recipe: meal.recipe,
-        proteins: meal.proteins,
-        carbohydrates: meal.carbohydrates,
-        fats: meal.fats,
-        ingredients: meal.mealIngredients,
-        servings: "1",
-      };
-    });
+    // umieszczenie tych posiłków w state.allMeals
+    pushMealsToState(data);
   } catch (err) {
     console.error(`${err}`);
     throw err;

@@ -4,78 +4,8 @@ import View from "./View";
 class PopupView extends View {
   _parentElement = document.querySelector(".modal-popups");
 
-  // handler for using buttons
-  addHandlerOnMealButtonsPopup() {
-    // znajduje wszystkie grupy przycisków z głównej strony
-    const addToListGroupNodeListModal =
-      this._parentElement.querySelectorAll(".addToListGroup2");
-
-    // dodaje handlery do każdej grupy przycisków
-    addToListGroupNodeListModal.forEach(this._addHandlerOnMealButtonsPopup);
-  }
-
-  // dodaje event listenery do każdego przycisku z każdej grupy przycisków z osobna
-  // FIXME:
-  // plus i minus nie działają w modalach. Chyba problem z inputem
-
-  _addHandlerOnMealButtonsPopup(node) {
-    // selectors for meal buttons and input
-    const btnMinus = node.querySelector(".btn--minus_popup");
-    const btnPlus = node.querySelector(".btn--plus_popup");
-    const inputQuantity = node.querySelector(".quantity");
-    const btnAddToList = node.querySelector(".addToList_popup");
-
-    // event listener for minus button
-    btnMinus.addEventListener("click", function () {
-      if (Number(inputQuantity.value) > 1) {
-        inputQuantity.value = String(Number(inputQuantity.value) - 1);
-        btnAddToList.dataset.mealServings = inputQuantity.value;
-      }
-    });
-
-    // event listener for plus button
-    btnPlus.addEventListener("click", function () {
-      if (Number(inputQuantity.value) < 100) {
-        inputQuantity.value = String(Number(inputQuantity.value) + 1);
-        btnAddToList.dataset.mealServings = inputQuantity.value;
-      }
-    });
-  }
-
-  // osobny handler na Dodaj do listy
-  addHandlerAddToListPopup(handler) {
-    this._parentElement.addEventListener("click", function (e) {
-      const btnAddToListPopup = e.target.closest(".addToList_popup");
-
-      if (!btnAddToListPopup) return;
-
-      // pobierz id
-      const mealId = btnAddToListPopup.dataset.mealId;
-
-      // pobierz nazwę dania
-      const mealName = btnAddToListPopup.dataset.mealName;
-
-      // pobierz ilość porcji
-      const mealServings = btnAddToListPopup.dataset.mealServings;
-
-      // utwórz obiekt
-      const mealToListObject = {
-        id: mealId,
-        name: mealName,
-        servings: mealServings,
-      };
-
-      handler(mealToListObject);
-    });
-  }
-
-  // Joining generated HTML modals for every meal
-  _generateMarkup() {
-    return this._data.map(this._generateMarkupItemModal).join("");
-  }
-
   // modal content
-  _generateMarkupItemModal(meal) {
+  _generateMarkupItem(meal) {
     return `
         <div
         class="portfolio-modal modal fade"
@@ -141,10 +71,10 @@ class PopupView extends View {
                     >
                     <div class="btn-group" role="group"></div>
 
-                    <div class="input-group btn-group addToListGroup2">
+                    <div class="input-group btn-group addToListGroup">
                         <div class="input-group-prepend">
                         <button
-                            class="btn btn-primary btn--minus_popup"
+                            class="btn btn-primary btn--minus"
                             type="button"
                         >
                             <svg
@@ -174,7 +104,7 @@ class PopupView extends View {
 
                         <div class="input-group-prepend">
                         <button
-                            class="btn btn-primary btn--plus_popup"
+                            class="btn btn-primary btn--plus"
                             type="button"
                         >
                             <svg
@@ -195,7 +125,7 @@ class PopupView extends View {
 
                         <div class="input-group-prepend">
                         <button
-                            class="btn btn-primary addToList_popup"
+                            class="btn btn-primary addToList"
                             data-meal-id="${meal.id}" 
                             data-meal-name="${meal.name}"
                             data-meal-servings="${meal.servings}"

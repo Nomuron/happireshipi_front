@@ -82,6 +82,9 @@ export const addMealToList = function (mealToListObject) {
   // dodaje posiłek do listy
   state.bookmarks.push(mealToListObject);
 
+  // test
+  console.log(state.bookmarks);
+
   // zapis do local storage
   persistBookmarks();
 };
@@ -90,6 +93,9 @@ export const addMealToList = function (mealToListObject) {
 export const replaceMealInList = function (mealToListObject, mealIdInList) {
   // jeśli dany posiłek jest na liście to jest zastępowany
   state.bookmarks.splice(mealIdInList, 1, mealToListObject);
+
+  // test
+  console.log(state.bookmarks);
 
   // zapis do local storage
   persistBookmarks();

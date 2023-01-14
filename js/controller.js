@@ -20,6 +20,7 @@ const controlAllMeals = async function () {
 
     // event listener for JQuery buttons
     MainView.addHandlerOnMealButtons();
+    PopupView.addHandlerOnMealButtonsPopup();
   } catch (err) {
     console.error(err);
   }
@@ -65,6 +66,7 @@ const init = function () {
   controlMealButtons();
   MainView.addHandlerOnWindowLoad(controlAllMeals);
   MainView.addHandlerAddToList(controlAddToList);
+  PopupView.addHandlerAddToListPopup(controlAddToList);
 };
 
 function addOne() {

@@ -19,6 +19,7 @@ class MainView extends View {
     addToListGroupNodeList.forEach(this._addHandlerOnMealButtons);
   }
 
+  // dodaje event listenery do każdego przycisku z każdej grupy przycisków z osobna
   _addHandlerOnMealButtons(node) {
     // selectors for meal buttons and input
     const btnMinus = node.querySelector(".btn--minus");

@@ -15,6 +15,11 @@ export default class View {
     this._parentElement.innerHTML = "";
   }
 
+  // Event listener trigers handler when window is loaded
+  addHandlerOnWindowLoad(handler) {
+    window.addEventListener("load", handler);
+  }
+
   // Joining generated HTMLs for many meals in _data
   _generateMarkup() {
     return this._data.map(this._generateMarkupItem).join("");

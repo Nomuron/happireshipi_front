@@ -46,6 +46,9 @@ const controlAddToList = function (mealToListObject) {
     model.replaceMealInList(mealToListObject, bookmarkId);
   } else model.addMealToList(mealToListObject);
 
+  //test
+  console.log(model.state.bookmarks);
+
   // renderuje odpowiednią liczbę na ikonie listy
   ListIconView.render(model.state.bookmarks);
 };

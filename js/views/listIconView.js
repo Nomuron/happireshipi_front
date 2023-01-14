@@ -7,7 +7,6 @@ class ListIconView extends View {
   render(data) {
     this._data = data;
     const mealsNumber = data.length;
-    console.log(mealsNumber);
     this._parentElement.innerHTML = mealsNumber;
   }
 }

@@ -4,11 +4,6 @@ import View from "./View";
 class MainView extends View {
   _parentElement = document.querySelector(".meal__list");
 
-  // Event listener trigers handler when window is loaded
-  addHandlerOnWindowLoad(handler) {
-    window.addEventListener("load", handler);
-  }
-
   // Event listener on category list
   addHandlerCategorySelect(handler) {
     const filter = document.querySelector("#filtr");

@@ -1,9 +1,5 @@
 import * as bootstrap from "bootstrap";
 import * as model from "./model.js";
-import MainView from "./views/mainView.js";
-import PopupView from "./views/popupView.js";
-import ListIconView from "./views/listIconView.js";
-import DishesListView from "./views/dishesListView.js";
 import IngredientsListView from "./views/ingredientsListView.js";
 import $, { type } from "jquery";
 
@@ -11,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 // funkcja odpalana po załadowaniu strony
 const init = function () {
+  // Po załadowaniu strony od razu przelicza zakupy
   IngredientsListView.addHandlerOnWindowLoad(controlIngredientsList);
 };
 
@@ -23,13 +20,10 @@ const controlIngredientsList = async function () {
     // przeliczanie zakupów
     await model.countShopping();
 
-    // TEST:
-    console.log(model.state.ingredients.map((ing) => ing.name));
-
     // renderowanie listy zakupów
     IngredientsListView.render(model.state.ingredients);
   } catch (err) {
-    console.log(`${err}`);
+    console.error(`${err}`);
   }
 };
 

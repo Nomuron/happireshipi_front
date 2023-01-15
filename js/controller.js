@@ -34,9 +34,6 @@ const controlAllMeals = async function () {
 const controlAddToList = function (mealToListObject) {
   model.addMeal(mealToListObject);
 
-  //test
-  console.log(model.state.bookmarks);
-
   // renderuje odpowiednią liczbę na ikonie listy
   ListIconView.render(model.state.bookmarks);
 };

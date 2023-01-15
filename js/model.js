@@ -145,8 +145,6 @@ const countIngredient = function (ingredient, servings) {
   // jeśli składnika nie ma w tablicy to jest tam umieszczany
   if (ingId < 0) {
     state.ingredients.push(ingred);
-    // TEST:
-    console.log(state.ingredients.at(-1).name);
   } else {
     // jeśli jest to pobiera starą ilość składników
     const oldAmount = state.ingredients[ingId].amount;
@@ -162,15 +160,16 @@ const countIngredient = function (ingredient, servings) {
 // funkcja sprawdza czy posiłek dodawany do listy już jest na liście
 // i podejmuje odpowiednie kroki
 export const addMeal = function (mealToListObject) {
-  // Dodaj posiłek do listy w state.bookmarks
-  // Jeśli ten posiłek tam jest to jest zastępowany
-  // Jeśli go tam nie ma to jest po prostu pushowany
-  if (state.bookmarks.some((bookmark) => bookmark.id === mealToListObject.id)) {
-    const bookmarkId = state.bookmarks.findIndex(
-      (bookmark) => bookmark.id === mealToListObject.id
-    );
-    replaceMealInList(mealToListObject, bookmarkId);
-  } else addMealToList(mealToListObject);
+  // szuka posiłku w state.bookmarks
+  const bookmarkId = state.bookmarks.findIndex(
+    (bookmark) => bookmark.id === mealToListObject.id
+  );
+
+  // jeśli nie znajdzie posiłku (-1) to po prostu dodaje do state.bookmarks
+  // W pozostałych przypadkach nadpisuje szukając po indeksie
+  bookmarkId < 0
+    ? addMealToList(mealToListObject)
+    : replaceMealInList(mealToListObject, bookmarkId);
 };
 
 // funkcja używana podczas dodawania posiłku do listy, gdy tego posiłku nie ma na liście
@@ -191,6 +190,8 @@ export const replaceMealInList = function (mealToListObject, mealIdInList) {
   persistBookmarks();
 };
 
+// Do czyszczenia listy zapisanych posiłków.
+// Używany podczas wciśnięcia "Wyczyść listę dań"
 export const cleanList = function () {
   // wyczyść state.bookmarks
   state.bookmarks = [];

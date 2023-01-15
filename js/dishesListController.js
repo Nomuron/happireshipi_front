@@ -1,7 +1,5 @@
 import * as bootstrap from "bootstrap";
 import * as model from "./model.js";
-import MainView from "./views/mainView.js";
-import PopupView from "./views/popupView.js";
 import ListIconView from "./views/listIconView.js";
 import DishesListView from "./views/dishesListView.js";
 import $, { type } from "jquery";

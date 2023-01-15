@@ -22,6 +22,7 @@ export default class View {
 
   // Joining generated HTMLs for many meals in _data
   _generateMarkup() {
+    console.log(this._data);
     return this._data.map(this._generateMarkupItem).join("");
   }
 

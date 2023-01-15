@@ -22,6 +22,12 @@ const controlIngredientsList = async function () {
 
     // przeliczanie zakupów
     await model.countShopping();
+
+    // TEST:
+    console.log(model.state.ingredients.map((ing) => ing.name));
+
+    // renderowanie listy zakupów
+    IngredientsListView.render(model.state.ingredients);
   } catch (err) {
     console.log(`${err}`);
   }

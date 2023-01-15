@@ -106,7 +106,7 @@ export const findAllByCategory = async function (category) {
 
 // liczenie zakupów
 export const countShopping = async function () {
-  Promise.all(
+  await Promise.all(
     state.bookmarks.map(async (bookmark) => {
       // zapisuje ilość porcji
       const servings = bookmark.servings;
@@ -116,9 +116,9 @@ export const countShopping = async function () {
 
       // iteruje po state.meal.ingredients i uruchamia funkcję
       // która przelicza ilość składników
-      state.meal.ingredients.map((ingredient) => {
-        countIngredient(ingredient, servings);
-      });
+      state.meal.ingredients.map((ingredient) =>
+        countIngredient(ingredient, servings)
+      );
     })
   ).catch((err) => {
     console.error(`${err}`);
@@ -140,12 +140,15 @@ const countIngredient = function (ingredient, servings) {
   ingred.amount *= servings;
 
   // szuka składnika na liście
-  if (state.ingredients.some((ing) => ing.name === ingred.name)) {
-    // jest, więc szuka indeks składnika z tablicy
-    const ingId = state.ingredients.findIndex(
-      (ing) => ing.name === ingred.name
-    );
-    // zapamiętuje ilość z tablicy
+  const ingId = state.ingredients.findIndex((ing) => ing.name === ingred.name);
+
+  // jeśli składnika nie ma w tablicy to jest tam umieszczany
+  if (ingId < 0) {
+    state.ingredients.push(ingred);
+    // TEST:
+    console.log(state.ingredients.at(-1).name);
+  } else {
+    // jeśli jest to pobiera starą ilość składników
     const oldAmount = state.ingredients[ingId].amount;
 
     // sumuje starą i nową ilość
@@ -154,8 +157,6 @@ const countIngredient = function (ingredient, servings) {
     // zastępuje
     state.ingredients.splice(ingId, 1, ingred);
   }
-  // jeśli składnika nie ma w tablicy to jest tam umieszczany
-  else state.ingredients.push(ingred);
 };
 
 // funkcja sprawdza czy posiłek dodawany do listy już jest na liście

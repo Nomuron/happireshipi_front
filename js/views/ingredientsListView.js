@@ -1,16 +1,42 @@
-import View from "./View.js";
+// import View from "./View.js";
 
-class IngredientsListView extends View {
-  _parentElement = document.querySelector(".ingredients__list");
+class IngredientsListView {
+  _parentElement = document.querySelector("#ingredients__list");
+  _data;
 
-  _generateMarkupItem(bookmark) {
+  // Event listener trigers handler when window is loaded
+  addHandlerOnWindowLoad(handler) {
+    window.addEventListener("load", handler);
+  }
+
+  // Method for rendering data
+  render(data) {
+    this._data = data;
+    const markup = this._generateMarkup();
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  // Clear content of _parentElement
+  _clear() {
+    this._parentElement.innerHTML = "";
+  }
+
+  // Joining generated HTMLs for many meals in _data
+  _generateMarkup() {
+    console.log(this._data);
+    return this._data
+      .map(
+        (ingredient) =>
+          `<li>${ingredient.name} ${ingredient.amount} ${ingredient.measure}</li>`
+      )
+      .join("");
+  }
+
+  // generuje htmla dla jednego składnika listy zakupów
+  _generateMarkupItem(ingredient) {
     return `
-    <li
-        class="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <div>Nazwa dania</div>
-        <span class="badge badge-primary badge-pill">14</span>
-      </li>
+    <li>${ingredient.name}${ingredient.amount}${ingredient.measure}</li>
     `;
   }
 }

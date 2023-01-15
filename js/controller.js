@@ -32,19 +32,7 @@ const controlAllMeals = async function () {
 
 // sterownik dodający posiłek do listy
 const controlAddToList = function (mealToListObject) {
-  // Dodaj posiłek do listy w model.state.bookmarks
-  // Jeśli ten posiłek tam jest to jest zastępowany
-  // Jeśli go tam nie ma to jest po prostu pushowany
-  if (
-    model.state.bookmarks.some(
-      (bookmark) => bookmark.id === mealToListObject.id
-    )
-  ) {
-    const bookmarkId = model.state.bookmarks.findIndex(
-      (bookmark) => bookmark.id === mealToListObject.id
-    );
-    model.replaceMealInList(mealToListObject, bookmarkId);
-  } else model.addMealToList(mealToListObject);
+  model.addMeal(mealToListObject);
 
   //test
   console.log(model.state.bookmarks);

@@ -6,7 +6,7 @@ import ListIconView from "./views/listIconView.js";
 import DishesListView from "./views/dishesListView.js";
 import $, { type } from "jquery";
 
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 // funkcja odpalana po załadowaniu strony
 const init = function () {

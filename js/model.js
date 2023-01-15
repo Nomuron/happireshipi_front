@@ -15,6 +15,8 @@ export const state = {
   allMeals: [],
   // tutaj będą posiłki dodane do listy
   bookmarks: [],
+  // tutaj będą zakupy
+  ingredients: [],
 };
 
 // Function for fetching JSON from url
@@ -36,7 +38,7 @@ export const loadMeal = async function (id) {
     // get data
     const data = await getJSON(`${API_URL}${id}`);
 
-    const { meal } = data;
+    const meal = data;
     state.meal = {
       id: meal.id,
       name: meal.name,
@@ -47,7 +49,7 @@ export const loadMeal = async function (id) {
       proteins: meal.proteins,
       carbohydrates: meal.carbohydrates,
       fats: meal.fats,
-      ingredients: meal.mealIngredients[0],
+      ingredients: meal.mealIngredients,
     };
   } catch (err) {
     console.error(`${err}`);
@@ -102,6 +104,74 @@ export const findAllByCategory = async function (category) {
   }
 };
 
+// liczenie zakupów
+export const countShopping = async function () {
+  Promise.all(
+    state.bookmarks.map(async (bookmark) => {
+      // zapisuje ilość porcji
+      const servings = bookmark.servings;
+
+      // pobiera dane do state.meal
+      await loadMeal(bookmark.id);
+
+      // iteruje po state.meal.ingredients i uruchamia funkcję
+      // która przelicza ilość składników
+      state.meal.ingredients.map((ingredient) => {
+        countIngredient(ingredient, servings);
+      });
+    })
+  ).catch((err) => {
+    console.error(`${err}`);
+    throw err;
+  });
+};
+
+// funkcja przelicza składniki w zależności od ilości porcji
+// i tego, czy dany składnik znajduje się na liście
+const countIngredient = function (ingredient, servings) {
+  // przemapowanie JSONów
+  const ingred = {
+    name: ingredient.ingredient.name,
+    measure: ingredient.ingredient.measure,
+    amount: ingredient.amount,
+  };
+
+  // przelicza ilość składników w zależności od porcji
+  ingred.amount *= servings;
+
+  // szuka składnika na liście
+  if (state.ingredients.some((ing) => ing.name === ingred.name)) {
+    // jest, więc szuka indeks składnika z tablicy
+    const ingId = state.ingredients.findIndex(
+      (ing) => ing.name === ingred.name
+    );
+    // zapamiętuje ilość z tablicy
+    const oldAmount = state.ingredients[ingId].amount;
+
+    // sumuje starą i nową ilość
+    ingred.amount += oldAmount;
+
+    // zastępuje
+    state.ingredients.splice(ingId, 1, ingred);
+  }
+  // jeśli składnika nie ma w tablicy to jest tam umieszczany
+  else state.ingredients.push(ingred);
+};
+
+// funkcja sprawdza czy posiłek dodawany do listy już jest na liście
+// i podejmuje odpowiednie kroki
+export const addMeal = function (mealToListObject) {
+  // Dodaj posiłek do listy w state.bookmarks
+  // Jeśli ten posiłek tam jest to jest zastępowany
+  // Jeśli go tam nie ma to jest po prostu pushowany
+  if (state.bookmarks.some((bookmark) => bookmark.id === mealToListObject.id)) {
+    const bookmarkId = state.bookmarks.findIndex(
+      (bookmark) => bookmark.id === mealToListObject.id
+    );
+    replaceMealInList(mealToListObject, bookmarkId);
+  } else addMealToList(mealToListObject);
+};
+
 // funkcja używana podczas dodawania posiłku do listy, gdy tego posiłku nie ma na liście
 export const addMealToList = function (mealToListObject) {
   // dodaje posiłek do listy
@@ -126,6 +196,12 @@ export const cleanList = function () {
 
   // zapis do local storage
   persistBookmarks();
+};
+
+// do czyszczenia przeliczonych skłądników
+// odpalany za każdym załadowaniem listy zakupów
+export const cleanIngredientList = function () {
+  state.ingredients = [];
 };
 
 // zapis do local storage

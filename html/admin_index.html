@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Panel</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/admin_styles.css">
+    </head>
+    <body style="background-color:rgb(26,26,26);">
+        <header>
+            <table class="navigation">
+                <tr>
+                    <td class="nav_button"></td>
+                    <td class="nav_middle">
+                        <br>
+                        <div class="app_title">
+                            PANEL ADMINISTRATORA
+                        </div>
+                        <br>
+                    </td>
+                    <td class="nav_button"></td>
+                </tr>
+            </table>
+        </header>
+        <section class="page_login_title">
+            <p>Zaloguj się</p>
+        </section>
+        <div id="login_form">
+            <form>
+                <label for="login">Login</label>
+                <input class="login_text" type="text" id="login" name="login" placeholder="Login administratora">
+                <label for="password">Hasło</label>
+                <input class="login_text" type="password" id="password" name="password" placeholder="Hasło administratora">
+                <button class="login_btn" id="login_btn" type="button" value="Zaloguj">Zaloguj</button>
+            </form>
+            <p class="login_message" id="login_message"></p>
+        </div>
+        <script type="module" src="../js/admin_controller.js"></script>
+    </body>
+</html>

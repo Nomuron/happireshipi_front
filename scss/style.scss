@@ -11,6 +11,7 @@ h4 {
   margin-top: 30px;
   text-align: center;
   margin-bottom: 20px;
+  font-size: 1.35rem;
 }
 
 #footer {
@@ -18,12 +19,14 @@ h4 {
 }
 
 #clean {
-  width: 200px;
+  width: 150px;
+  color: rgb(104, 0, 0);
+  background-color: lightcoral;
 }
 
 #toProducts {
   width: 150px;
-  height: 50px;
+  height: 40px;
 }
 
 #circle {
@@ -69,7 +72,7 @@ h4 {
 }
 
 #inList {
-  top: 70px;
+  top: 60px;
   right: 55px;
   position: absolute;
 }
@@ -239,8 +242,8 @@ modal to juz o pop-upa*/
   }
 
   #inList {
-    top: 80px;
-    right: 80px;
+    top: 25px;
+    right: 25px;
     position: absolute;
   }
 }

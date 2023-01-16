@@ -15,8 +15,6 @@ const init = function () {
                 contentType: "application/json; charset=utf-8",
                 body:null
             }).then((response) => { response.json().then(data => {
-                console.log("test");
-                console.log(data);
                 if(data==true){
                     window.location.href = '/html/admin_home_page.html';
                 } else {
